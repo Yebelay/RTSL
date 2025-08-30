@@ -209,7 +209,7 @@ knitr::include_graphics(here("outputs", "figures", "measles_plot.png"))
 #| label: maternal-causes
 #| echo: false
 #| out-width: 45%
-#| height: 100px
+#| height: 120px
 #| fig-align: "center"
 knitr::include_graphics(here("outputs", "figures", "maternal_causes_plot.png"))
 ```

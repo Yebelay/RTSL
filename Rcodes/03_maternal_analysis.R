@@ -1,5 +1,4 @@
-# R/03_maternal_analysis.R
-# Analysis of maternal deaths data
+# 03_maternal_analysis.R( Analysis of maternal deaths data
 
 library(tidyverse)
 library(here)
@@ -49,7 +48,7 @@ maternal_causes_plot <- ggplot(causes_data, aes(x = reorder(`Short Name`, n), y 
 
 # Save plot
 ggsave(here("outputs", "figures", "maternal_causes_plot.png"), 
-       maternal_causes_plot, width = 6, height = 4, dpi = 300)
+       maternal_causes_plot, width = 6, height = 5, dpi = 300)
 
 # Load shapefile 
 ethiopia_map <- st_read(here("data", "shapefiles", "eth_admbnda_adm1_csa_bofedb_2021.shp"))
