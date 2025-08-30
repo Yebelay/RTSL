@@ -1,0 +1,32 @@
+"Region","Result","Count"
+"Afar","Indeterminate",1
+"Afar","Negative",47
+"Afar","Not done",3
+"Afar","Pending",1
+"Afar","Positive",20
+"Amhara","Indeterminate",3
+"Amhara","Negative",22
+"Amhara","Not done",2
+"Amhara","Positive",21
+"Gambela","Negative",16
+"Gambela","Positive",1
+"Harari","Negative",33
+"Harari","Not done",7
+"Harari","Positive",23
+"Oromia","Indeterminate",6
+"Oromia","Negative",98
+"Oromia","Not done",17
+"Oromia","Positive",37
+"SNNP","Indeterminate",1
+"SNNP","Negative",20
+"SNNP","Not done",2
+"South West","Indeterminate",1
+"South West","Negative",24
+"South West","Not done",6
+"South West","Pending",1
+"South West","Positive",30
+"Tigray","Indeterminate",2
+"Tigray","Negative",36
+"Tigray","Not done",11
+"Tigray","Pending",1
+"Tigray","Positive",60

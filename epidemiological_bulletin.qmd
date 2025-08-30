@@ -1,0 +1,242 @@
+---
+title: " "
+format:
+  docx:
+    reference-doc: "custom-reference.docx"
+params:
+  current_week: 34
+  current_year: 2024
+  week_dates: "19–25, Aug, 2024"
+---
+
+```{r}
+#| include: false
+# Setup chunk
+library(tidyverse)
+library(here)
+library(kableExtra)
+library(ggplot2)
+library(patchwork)
+library(flextable)
+library(officer)
+```
+
+# **Week `r params$current_week` &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Epidemiological Bulletin &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `r params$week_dates`**
+
+
+## **Summary**
+
+**Executive Summary**
+
+This report highlights the critical public health concerns requiring immediate attention. The detection of the first confirmed AFP case this year signals a potential polio transmission risk. The suspected cholera cases reported in Dire Dawa highlight the urgent need for rapid testing and a faster public health response to prevent further spread. Malaria continues to burden particularly in Amhar, Dire Dawa, Sidama, and Afar regions, with over 144,000 cases reported nationwide. 
+
+Measles outbreaks continue with high confirmation rates, especially in Tigray, Oromia, and the Southwest regions, reflecting serious immunity gaps. At the same time, maternal deaths remain alarmingly high in Sidama, Amhara, and Tigray regions, indicating the urgent need to strengthen emergency obstetric care. Together, these challenges highlight the importance of immediate public health action to prevent further escalation.
+
+
+**Immediately Notifiable Diseases and Events**
+
+```{r}
+#| label: notifiable-diseases
+#| echo: false
+week_summary <- read.csv(here("outputs", "tables", "week_summary.csv"))
+disease_region <- read.csv(here("outputs", "tables", "disease_by_region.csv"))
+
+disease_strings <- disease_region %>%
+  group_by(Disease) %>%
+  summarise(
+    regions = paste0(org_unit_name, "(", Cases, ")", collapse = ", "),
+    .groups = "drop")
+```
+
+
+- **AFP**: `r week_summary$AFP_suspected` suspected cases were reported from `r disease_strings$regions[disease_strings$Disease == "afp_suspected"]` regions.
+
+- **Anthrax**: `r week_summary$Anthrax_suspected` suspected cases were reported from `r disease_strings$regions[disease_strings$Disease == "anthrax_suspected"]` regions.
+
+- **Cholera**: `r week_summary$Cholera_suspected` suspected cases were reported from `r disease_strings$regions[disease_strings$Disease == "cholera_suspected"]` regions.
+
+- **Measles**: `r week_summary$Measles_suspected` suspected cases were reported from `r disease_strings$regions[disease_strings$Disease == "measles_suspected"]` regions.
+
+**Other Diseases and Events**
+
+
+-   **Non-bloody Diarrhoea**: `r week_summary$Diarrhoea_suspected` suspected cases were reported from `r disease_strings$regions[disease_strings$Disease == "diarrhoea_non_bloody_suspecteded"]` regions.
+-   **Malaria**: `r week_summary$Malaria_suspected` suspected cases were reported from `r disease_strings$regions[disease_strings$Disease == "malaria_suspected"]` regions.
+-   **Typhoid Fever**: **`r week_summary$Typhoid_suspected`** suspected cases were reported from `r disease_strings$regions[disease_strings$Disease == "typhoid_fever_suspected"]` regions.
+
+## **Summary Report Priority Diseases, Conditions and Events**
+
+```{r}
+#| label: summary-table
+#| echo: false
+library(flextable)
+library(officer)
+
+cumulative_summary <- read.csv(here("outputs", "tables", "cumulative_summary.csv"))
+week_summary <- read.csv(here("outputs", "tables", "week_summary.csv"))
+# Create a table with corrected column names
+summary_table <- data.frame(
+    Disease = c("AFP", "Anthrax", "Cholera", "Non-bloody Diarrhoea", "Malaria", 
+                "Measles", "Monkeypox", "Plague", "Typhoid Fever"),
+    Week_Suspected = c(
+        week_summary$AFP_suspected,
+        week_summary$Anthrax_suspected,
+        week_summary$Cholera_suspected,
+        week_summary$Diarrhoea_suspected,
+        week_summary$Malaria_suspected,
+        week_summary$Measles_suspected,
+        week_summary$Monkeypox_suspected,
+        week_summary$Plague_suspected,
+        week_summary$Typhoid_suspected),
+    Week_Tested = c(
+        week_summary$AFP_tested,
+        week_summary$Anthrax_tested,
+        week_summary$Cholera_tested,
+        week_summary$Diarrhoea_tested,
+        week_summary$Malaria_tested,
+        week_summary$Measles_tested,
+        week_summary$Monkeypox_tested,
+        week_summary$Plague_tested,
+        week_summary$Typhoid_tested ),
+    Week_Confirmed = c(
+        week_summary$AFP_confirmed,
+        week_summary$Anthrax_confirmed,
+        week_summary$Cholera_confirmed,
+        week_summary$Diarrhoea_confirmed,
+        week_summary$Malaria_confirmed,
+        week_summary$Measles_confirmed,
+        0,  # we can put 0 or can develop a function to generate 0 for Monkeypox confirmed
+        0,  # Plague
+        week_summary$Typhoid_confirmed),
+    Cumulative_Suspected = c(
+        cumulative_summary$AFP_suspected,
+        cumulative_summary$Anthrax_suspected,
+        cumulative_summary$Cholera_suspected,
+        cumulative_summary$Diarrhoea_suspected,
+        cumulative_summary$Malaria_suspected,
+        cumulative_summary$Measles_suspected,
+        cumulative_summary$Monkeypox_suspected,
+        cumulative_summary$Plague_suspected,
+        cumulative_summary$Typhoid_suspected),
+    Cumulative_Tested = c(
+        cumulative_summary$AFP_tested,
+        cumulative_summary$Anthrax_tested,
+        cumulative_summary$Cholera_tested,
+        cumulative_summary$Diarrhoea_tested,
+        cumulative_summary$Malaria_tested,
+        cumulative_summary$Measles_tested,
+        cumulative_summary$Monkeypox_tested,
+        cumulative_summary$Plague_tested,
+        cumulative_summary$Typhoid_tested ),
+    Cumulative_Confirmed = c(
+        cumulative_summary$AFP_confirmed,
+        cumulative_summary$Anthrax_confirmed,
+        cumulative_summary$Cholera_confirmed,
+        cumulative_summary$Diarrhoea_confirmed,
+        cumulative_summary$Malaria_confirmed,
+        cumulative_summary$Measles_confirmed,
+        0,  # we can put 0 or can develop a function to generate 0 for Monkeypox confirmed
+        0,  # similar for Plague confirmed
+        cumulative_summary$Typhoid_confirmed))
+
+# Format large numbers
+summary_table <- summary_table %>%
+  mutate(across(where(is.numeric), ~ ifelse(. > 1000, format(., big.mark = ","), .)))
+
+ft <- flextable(summary_table) %>%
+  set_header_labels(
+    Disease = "Disease/Event/Condition",
+    Week_Suspected = "Suspected",
+    Week_Tested = "Tested",
+    Week_Confirmed = "Confirmed",
+    Cumulative_Suspected = "Suspected",
+    Cumulative_Tested = "Tested",
+    Cumulative_Confirmed = "Confirmed") %>%
+  add_header_row(
+    values = c("", paste("Week", params$current_week), "Week 1 to 34, Cumulative Total"),
+    colwidths = c(1, 3, 3)) %>%
+  bg(part = "header", bg = "#0f52ba") %>% # header
+  color(part = "header", color = "white") %>% # header text color
+  bg(j = 1, part = "body", bg = "#0f52ba") %>% # first column
+  color(j = 1, part = "body", color = "white") %>% # first column text color
+  bold(part = "header") %>%
+  align(align = "center", part = "all") %>%
+  align(j = 1, align = "left", part = "all") %>%
+  border_outer(border = fp_border(color = "white", width = 0.5)) %>%
+  border_inner_h(border = fp_border(color = "white", width = 0.5)) %>%
+  hline(border = fp_border(color = "white", width = 1.5), part = "header") %>%
+  # Use fontsize() to reduce the size of all text in the table
+  fontsize(size = 9, part = "all") %>%
+     autofit() %>%
+  set_table_properties(layout = "autofit")
+ft
+```
+
+## Summary of VPD Surveillance Indicators
+
+### Measles Laboratory Test Results by Region
+
+```{r}
+#| label: measles-results
+#| echo: false
+measles_summary <- read.csv(here("outputs", "tables", "measles_summary.csv"))
+```
+
+::: {layout-ncol=2}
+
+
+ - The country has recorded a total of 4360 suspected measles cases in `r params$current_year`.
+ 
+
+ - From the `r sum(measles_summary$Count)` measles specimens that have been tested, `r sum(measles_summary$Count[measles_summary$Result == "Positive"])` have been confirmed positive (PR `r round((sum(measles_summary$Count[measles_summary$Result == "Positive"]) / sum(measles_summary$Count)) * 100, 1)` %).
+
+```{r}
+#| label: measles-plot
+#| echo: false
+#| out-width: 60%
+#| height: 100px
+knitr::include_graphics(here("outputs", "figures", "measles_plot.png"))
+```
+:::
+
+## **Maternal Deaths**
+
+::: {layout-ncol=2}
+
+### Causes of maternal death (Week `r params$current_week`, n=15)
+
+```{r}
+#| label: maternal-causes
+#| echo: false
+#| out-width: 45%
+#| height: 100px
+#| fig-align: "center"
+knitr::include_graphics(here("outputs", "figures", "maternal_causes_plot.png"))
+```
+
+### Cumulative distribution of maternal deaths (2024) by region
+
+```{r}
+#| label: maternal-map1
+#| out-width: 60%
+#| fig-align: "center"
+#| echo: false
+knitr::include_graphics(here("outputs", "figures", "maternal_map_plot.png"))
+```
+
+:::
+
+
+```{r}
+#| echo: false
+maternal <- read.csv(here("outputs", "tables", "weekly_maternal.csv"))
+```
+
+
+- The bar chart on the left summarizes the causes of deaths of 15 maternal deaths recorded in week `r params$current_week`
+- Hypertensive disorder, Non-obstetric complications, and Obstetric haemorrhage continue to be the leading causes of maternal deaths this year.
+
+- Cumulatively, in `r params$current_year`, **`r sum(read.csv(here("outputs", "tables", "weekly_maternal.csv"))$Cumulative)`** maternal deaths have been recorded across the country, as depicted on the map.
+
+- Regions with darker shades (Sidama, Amhara, and Tigray) indicate those with a higher number of reported maternal deaths.
+

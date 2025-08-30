@@ -1,0 +1,37 @@
+"org_unit_name","Disease","Cases"
+"Dire Dawa","cholera_suspected",4
+"Dire Dawa","diarrhoea_non_bloody_suspecteded",3856
+"Dire Dawa","malaria_suspected",23810
+"Dire Dawa","typhoid_fever_suspected",4
+"Sidama","measles_suspected",1
+"Sidama","diarrhoea_non_bloody_suspecteded",3828
+"Sidama","malaria_suspected",23453
+"Harari","afp_suspected",3
+"Harari","anthrax_suspected",7
+"Harari","diarrhoea_non_bloody_suspecteded",5142
+"Harari","malaria_suspected",2889
+"SNNP","afp_suspected",1
+"SNNP","anthrax_suspected",1
+"SNNP","measles_suspected",1
+"SNNP","diarrhoea_non_bloody_suspecteded",4163
+"SNNP","malaria_suspected",10414
+"Benishangul Gumz","diarrhoea_non_bloody_suspecteded",1465
+"Benishangul Gumz","malaria_suspected",7282
+"Somali","measles_suspected",14
+"Somali","diarrhoea_non_bloody_suspecteded",2289
+"Somali","malaria_suspected",14352
+"Somali","typhoid_fever_suspected",9
+"Oromia","measles_suspected",2
+"Oromia","diarrhoea_non_bloody_suspecteded",2495
+"Oromia","malaria_suspected",4643
+"Oromia","typhoid_fever_suspected",18
+"Amhara","afp_suspected",2
+"Amhara","measles_suspected",7
+"Amhara","diarrhoea_non_bloody_suspecteded",5419
+"Amhara","malaria_suspected",25239
+"Afar","measles_suspected",3
+"Afar","diarrhoea_non_bloody_suspecteded",1950
+"Afar","malaria_suspected",22041
+"Tigray","diarrhoea_non_bloody_suspecteded",4568
+"Tigray","malaria_suspected",10517
+"Tigray","typhoid_fever_suspected",2
