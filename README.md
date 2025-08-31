@@ -1,4 +1,4 @@
-# **Epidemiological Bulletin – Reproducible Scripts**
+# **Epidemiological Bulletin: Reproducible Scripts**
 - This repository contains reproducible R scripts and supporting files used to generate automated epidemiological bulletins.
 
   ## 📂 Repository Structure
@@ -15,7 +15,7 @@
   - 02_measles_analysis.R → processes measles_lab
   - 03_maternal_analysis.R → processes maternal deaths + shapefiles
 - Outputs (tables and figures) will be saved automatically inside the outputs/ folder.
-- 
+  
 **2. Generate the bulletin:**
    - Run epidemiological_bulletin.qmd (root folder) to produce the automated bulletin.
 
