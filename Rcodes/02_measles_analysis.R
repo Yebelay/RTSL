@@ -51,4 +51,5 @@ ggsave(here("outputs", "figures", "measles_plot.png"), measles_plot,
 # Save data
 write.csv(measles_summary, here("outputs", "tables", "measles_summary.csv"), row.names = FALSE)
 
-message("Measles analysis completed!")
+
+

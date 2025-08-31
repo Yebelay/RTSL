@@ -68,7 +68,7 @@ map_centroids <- st_centroid(map_data)
 maternal_map <- ggplot(map_data) +
   geom_sf(aes(fill = Cumulative), color = "grey50", size = 0.2) +
   geom_sf_text(data = map_centroids, aes(label = label), 
-               size = 3, color = "black", na.rm = TRUE) +
+               size = 3,  fontface = "bold", color = "black", na.rm = TRUE) +
   scale_fill_gradient(low = "#e5d0ff", high = "#6900a3", 
     na.value = "white", name = "Cumulative Maternal Deaths" ) +
   theme_void() + theme(

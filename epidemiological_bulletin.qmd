@@ -30,7 +30,9 @@ library(officer)
 
 This report highlights the critical public health concerns requiring immediate attention. The detection of the first confirmed AFP case this year signals a potential polio transmission risk. The suspected cholera cases reported in Dire Dawa highlight the urgent need for rapid testing and a faster public health response to prevent further spread. Malaria continues to burden particularly in Amhar, Dire Dawa, Sidama, and Afar regions, with over 144,000 cases reported nationwide. 
 
-Measles outbreaks continue with high confirmation rates, especially in Tigray, Oromia, and the Southwest regions, reflecting serious immunity gaps. At the same time, maternal deaths remain alarmingly high in Sidama, Amhara, and Tigray regions, indicating the urgent need to strengthen emergency obstetric care. Together, these challenges highlight the importance of immediate public health action to prevent further escalation.
+Measles outbreaks continue with high confirmation rates, especially in Tigray, Oromia, and the Southwest regions, reflecting serious immunity gaps. At the same time, maternal deaths remain alarmingly high in Sidama, Amhara, and Tigray regions, indicating the urgent need to strengthen emergency obstetric care. 
+
+Together, these challenges highlight the importance of immediate public health action to prevent further escalation.
 
 
 **Immediately Notifiable Diseases and Events**
@@ -74,7 +76,7 @@ library(officer)
 
 cumulative_summary <- read.csv(here("outputs", "tables", "cumulative_summary.csv"))
 week_summary <- read.csv(here("outputs", "tables", "week_summary.csv"))
-# Create a table with corrected column names
+# Create a table 
 summary_table <- data.frame(
     Disease = c("AFP", "Anthrax", "Cholera", "Non-bloody Diarrhoea", "Malaria", 
                 "Measles", "Monkeypox", "Plague", "Typhoid Fever"),
@@ -155,18 +157,17 @@ ft <- flextable(summary_table) %>%
   add_header_row(
     values = c("", paste("Week", params$current_week), "Week 1 to 34, Cumulative Total"),
     colwidths = c(1, 3, 3)) %>%
-  bg(part = "header", bg = "#0f52ba") %>% # header
-  color(part = "header", color = "white") %>% # header text color
-  bg(j = 1, part = "body", bg = "#0f52ba") %>% # first column
-  color(j = 1, part = "body", color = "white") %>% # first column text color
+  bg(part = "header", bg = "#0f52ba") %>% 
+  color(part = "header", color = "white") %>% 
+  bg(j = 1, part = "body", bg = "#0f52ba") %>% 
+  color(j = 1, part = "body", color = "white") %>% 
   bold(part = "header") %>%
   align(align = "center", part = "all") %>%
   align(j = 1, align = "left", part = "all") %>%
   border_outer(border = fp_border(color = "white", width = 0.5)) %>%
   border_inner_h(border = fp_border(color = "white", width = 0.5)) %>%
   hline(border = fp_border(color = "white", width = 1.5), part = "header") %>%
-  # Use fontsize() to reduce the size of all text in the table
-  fontsize(size = 9, part = "all") %>%
+    fontsize(size = 9, part = "all") %>%
      autofit() %>%
   set_table_properties(layout = "autofit")
 ft
@@ -193,7 +194,8 @@ measles_summary <- read.csv(here("outputs", "tables", "measles_summary.csv"))
 ```{r}
 #| label: measles-plot
 #| echo: false
-#| out-width: 60%
+#| out-width: 55%
+#| align: "left"
 #| height: 100px
 knitr::include_graphics(here("outputs", "figures", "measles_plot.png"))
 ```
@@ -208,9 +210,9 @@ knitr::include_graphics(here("outputs", "figures", "measles_plot.png"))
 ```{r}
 #| label: maternal-causes
 #| echo: false
-#| out-width: 45%
-#| height: 120px
-#| fig-align: "center"
+#| out-width: 40%
+#| height: 150px
+#| fig-align: "left"
 knitr::include_graphics(here("outputs", "figures", "maternal_causes_plot.png"))
 ```
 
@@ -218,8 +220,8 @@ knitr::include_graphics(here("outputs", "figures", "maternal_causes_plot.png"))
 
 ```{r}
 #| label: maternal-map1
-#| out-width: 60%
-#| fig-align: "center"
+#| out-width: 55%
+#| fig-align: "left"
 #| echo: false
 knitr::include_graphics(here("outputs", "figures", "maternal_map_plot.png"))
 ```

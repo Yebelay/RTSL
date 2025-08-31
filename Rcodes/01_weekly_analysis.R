@@ -84,7 +84,7 @@ cumulative_summary <- cumulative_data %>%
 write.csv(week_summary, here("outputs", "tables", "week_summary.csv"), row.names = FALSE)
 write.csv(cumulative_summary, here("outputs", "tables", "cumulative_summary.csv"), row.names = FALSE)
 
-# Generate disease distribution by region for the week
+# disease distribution by region for the week
 disease_by_region <- week_data %>%
   select(org_unit_name, 
          afp_suspected, anthrax_suspected, cholera_suspected, 
@@ -95,4 +95,5 @@ disease_by_region <- week_data %>%
 
 write.csv(disease_by_region, here("outputs", "tables", "disease_by_region.csv"), row.names = FALSE)
 
-message("Weekly analysis completed!")
+
+
