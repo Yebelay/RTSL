@@ -2,7 +2,9 @@
 - This repository contains reproducible R scripts and supporting files used to generate automated epidemiological bulletins.
 
 📂 **Repository Structure**
+
 *RTSL*
+
 ├── epidemiological_bulletin.qmd   # Quarto file to generate automated bulletin (Word → PDF)
 ├── data/                          # Raw datasets provided
 │   └── weekly_data_by_region, measles_lab data, maternal deaths and shapefiles
