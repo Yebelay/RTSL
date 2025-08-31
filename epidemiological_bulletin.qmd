@@ -11,7 +11,6 @@ params:
 
 ```{r}
 #| include: false
-# Setup chunk
 library(tidyverse)
 library(here)
 library(kableExtra)
